@@ -1,0 +1,187 @@
+[gd_scene load_steps=24 format=3 uid="uid://c81rsiufb0e5y"]
+
+[ext_resource type="Texture2D" uid="uid://cij7mg7buxsdr" path="res://textures/floor/wood_floor_deck_diff_1k.jpg" id="1_qn0p2"]
+[ext_resource type="Texture2D" uid="uid://cce4855gvgr3x" path="res://textures/sky/qwantani_dusk_2_2k.exr" id="1_w8x25"]
+[ext_resource type="Texture2D" uid="uid://cexsvoka2oihk" path="res://textures/floor/wood_floor_deck_disp_1k.png" id="2_ekd1y"]
+[ext_resource type="Texture2D" uid="uid://bsqaicc0k2h4y" path="res://textures/wall/red_brick_diff_1k.jpg" id="3_3tnv3"]
+[ext_resource type="Texture2D" uid="uid://t8tmhhltj0wg" path="res://textures/wall/red_brick_disp_1k.png" id="4_2lvrn"]
+[ext_resource type="PackedScene" uid="uid://bg3aoecgslg1j" path="res://scenes/nhanvat.tscn" id="7_lt8eq"]
+[ext_resource type="PackedScene" uid="uid://cv8iuof6l2ck5" path="res://scenes/vungmocua.tscn" id="7_yyhie"]
+[ext_resource type="Script" path="res://scenes/vungmocua.gd" id="8_3cle6"]
+[ext_resource type="PackedScene" uid="uid://dcre7wakemew2" path="res://area_3d.tscn" id="9_3qs3q"]
+[ext_resource type="PackedScene" uid="uid://b538e4jkhio6u" path="res://model/cake/Strawberry Shortcake.glb" id="10_qdvpu"]
+[ext_resource type="AudioStream" uid="uid://bh77wid022phu" path="res://sounds/picking-up-items.mp3" id="10_tj3lo"]
+[ext_resource type="Script" path="res://scenes/area_3d.gd" id="11_c33t2"]
+[ext_resource type="Script" path="res://scenes/area_3d_2.gd" id="11_xq7cb"]
+[ext_resource type="AudioStream" uid="uid://bn5ff4quebm6t" path="res://sounds/hb128.mp3" id="13_rueje"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5ios4"]
+panorama = ExtResource("1_w8x25")
+
+[sub_resource type="Sky" id="Sky_46tal"]
+sky_material = SubResource("PanoramaSkyMaterial_5ios4")
+
+[sub_resource type="Environment" id="Environment_8nxdg"]
+background_mode = 2
+sky = SubResource("Sky_46tal")
+ambient_light_color = Color(0.593134, 0.593134, 0.593134, 1)
+ambient_light_energy = 0.8
+tonemap_mode = 1
+ssr_enabled = true
+ssao_enabled = true
+ssao_intensity = 2.37
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwsrx"]
+albedo_texture = ExtResource("1_qn0p2")
+roughness = 0.95
+roughness_texture = ExtResource("2_ekd1y")
+normal_enabled = true
+normal_texture = ExtResource("2_ekd1y")
+uv1_triplanar = true
+uv2_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ybpg1"]
+albedo_texture = ExtResource("3_3tnv3")
+roughness_texture = ExtResource("4_2lvrn")
+normal_scale = 1.67
+normal_texture = ExtResource("4_2lvrn")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nrjj"]
+distance_fade_mode = 1
+distance_fade_max_distance = 182.46
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw3kk"]
+distance_fade_mode = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4asyd"]
+size = Vector3(11.3264, 10, 10.9873)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2lycy"]
+size = Vector3(21.5306, 6.85535, 12.6117)
+
+[node name="main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8nxdg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, -0.831882, 11.3732, 0.458072)
+light_energy = 0.677
+light_volumetric_fog_energy = 0.515
+light_angular_distance = 0.91
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.034277, -0.069931, 0.0418034)
+use_collision = true
+size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_xwsrx")
+
+[node name="wall" type="Node3D" parent="."]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.97823, -17.7632)
+use_collision = true
+size = Vector3(1, 5, 14.2704)
+material = SubResource("StandardMaterial3D_ybpg1")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="wall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.469916, 2.97823, -24.352)
+use_collision = true
+size = Vector3(1, 5, 49.0947)
+material = SubResource("StandardMaterial3D_2nrjj")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="wall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.8274, 2.97823, 0.0668259)
+use_collision = true
+size = Vector3(49.8376, 5, 0.709475)
+material = SubResource("StandardMaterial3D_2nrjj")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="wall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0188351, 2.97823, 25.0567)
+use_collision = true
+size = Vector3(0.676636, 5, 49.9969)
+material = SubResource("StandardMaterial3D_2nrjj")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="wall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 24.4673, 2.97823, 0.284966)
+use_collision = true
+size = Vector3(50.22, 5, 1.02469)
+material = SubResource("StandardMaterial3D_2nrjj")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="wall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.3266, 2.97823, -11.2039)
+use_collision = true
+size = Vector3(1, 5, 21.5017)
+material = SubResource("StandardMaterial3D_ybpg1")
+
+[node name="nhanvat" parent="." groups=["maincharacter"] instance=ExtResource("7_lt8eq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20978, 0)
+
+[node name="vungmocua" parent="." instance=ExtResource("7_yyhie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55921, 2.46584, -11.0838)
+script = ExtResource("8_3cle6")
+
+[node name="Sketchfab_Scene" parent="vungmocua/Node3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11673, -0.00875092, 0.01124)
+
+[node name="keys" type="Node3D" parent="."]
+
+[node name="key" parent="keys" instance=ExtResource("9_3qs3q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7487, 0.588475, -7)
+
+[node name="key2" parent="keys" instance=ExtResource("9_3qs3q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7792, 0.588475, -20.352)
+
+[node name="key4" parent="keys" instance=ExtResource("9_3qs3q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5692, 0.588475, 21.5819)
+
+[node name="Picking-up-items" type="AudioStreamPlayer" parent="keys"]
+stream = ExtResource("10_tj3lo")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("11_c33t2")
+
+[node name="special_wall" type="Node3D" parent="Area3D"]
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Area3D/special_wall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.0094, 2.97823, 16.6758)
+use_collision = true
+size = Vector3(0.676636, 5, 9.94039)
+material = SubResource("StandardMaterial3D_pw3kk")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Area3D/special_wall"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15.59, 2.97823, 20.8746)
+use_collision = true
+size = Vector3(9.07416, 5, 1.10154)
+material = SubResource("StandardMaterial3D_pw3kk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3488, 0.4995, 19.3114)
+shape = SubResource("BoxShape3D_4asyd")
+
+[node name="Area3D2" type="Area3D" parent="."]
+script = ExtResource("11_xq7cb")
+
+[node name="Strawberry Shortcake" parent="Area3D2" instance=ExtResource("10_qdvpu")]
+transform = Transform3D(-5.3203, 0, -6.31985, 0, 8.26112, 0, 6.31985, 0, -5.3203, 16.4302, 4.42938, -18.1076)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3271, 2.92767, -17.8899)
+shape = SubResource("BoxShape3D_2lycy")
+
+[node name="Hb128" type="AudioStreamPlayer" parent="Area3D2"]
+stream = ExtResource("13_rueje")
+
+[connection signal="body_entered" from="vungmocua" to="vungmocua" method="_on_body_entered"]
+[connection signal="body_exited" from="vungmocua" to="vungmocua" method="_on_body_exited"]
+[connection signal="body_entered" from="keys/key" to="keys/key" method="_on_body_entered"]
+[connection signal="body_entered" from="keys/key2" to="keys/key2" method="_on_body_entered"]
+[connection signal="body_entered" from="keys/key4" to="keys/key4" method="_on_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]
+
+[editable path="nhanvat"]
+[editable path="vungmocua"]
+[editable path="keys/key"]

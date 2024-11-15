@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv8iuof6l2ck5"]
+
+[ext_resource type="PackedScene" uid="uid://dh76gjnl4ng4k" path="res://model/door/minecraft_wooden_door.glb" id="1_ltplx"]
+[ext_resource type="AudioStream" uid="uid://df4a103wv7o3t" path="res://sounds/door-opening.mp3" id="2_404qo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ploet"]
+size = Vector3(1.97943, 3.98146, 4)
+
+[sub_resource type="Animation" id="Animation_dshtk"]
+resource_name = "opendoor"
+length = 3.0
+capture_included = true
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.06667, 1.13333, 1.63333, 1.66667, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.243683, 0), Vector3(0, 0.0351511, 0), Vector3(0, 0, 0), Vector3(12.5664, 0, 0), Vector3(12.6187, 0, 0), Vector3(12.5664, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.73333, 1.96667, 2.16667, 2.4, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 2,
+"values": [Vector3(-1.1217, 0, 0), Vector3(-1.1217, 0, 0), Vector3(-1.1217, 1.64619, 0), Vector3(-1.1217, 3.05721, 0), Vector3(-1.1217, 3.55107, 0), Vector3(-1.1217, 3.97437, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ssfgc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.1217, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ftcdr"]
+_data = {
+"RESET": SubResource("Animation_ssfgc"),
+"opendoor": SubResource("Animation_dshtk")
+}
+
+[node name="vungmocua" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0289001, 0.0151901, 0.326111)
+shape = SubResource("BoxShape3D_ploet")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ftcdr")
+}
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1217, 0, 0)
+
+[node name="Sketchfab_Scene" parent="Node3D" instance=ExtResource("1_ltplx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1217, 0, 0)
+
+[node name="Door-opening" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_404qo")

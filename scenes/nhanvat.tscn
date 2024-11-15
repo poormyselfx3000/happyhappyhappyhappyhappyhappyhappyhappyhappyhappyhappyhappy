@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg3aoecgslg1j"]
+
+[ext_resource type="Script" path="res://scripts/nhanvat.gd" id="1_qbyd1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wu1re"]
+
+[node name="nhanvat" type="CharacterBody3D"]
+transform = Transform3D(2.6, 0, 0, 0, 2.6, 0, 0, 0, 2.6, 0, 0, 0)
+script = ExtResource("1_qbyd1")
+
+[node name="hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.615877, 0, 0, 0, 0.615877, 0, 0, 0, 0.615877, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_wu1re")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.397889, 0)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+transform = Transform3D(0.384615, 0, 0, 0, 0.384615, 0, 0, 0, 0.384615, 0, 0, -0.155625)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 917.0
+offset_top = 542.0
+offset_right = 1151.0
+offset_bottom = 612.0
+text = "lol"
